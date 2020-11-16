@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:apitest/widgets/circle.dart';
+import 'package:apitest/widgets/icon_container.dart';
+import 'package:apitest/widgets/login_form.dart';
+
+import 'package:apitest/utils/responsive.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -10,41 +14,59 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
+    final Responsive responsive = Responsive.of(context);
 
-    final double pinkSize = size.width * 0.8;
-    final double orangeSize = size.width * 0.57;
+    final double pinkSize = responsive.Wp(80);
+    final double orangeSize = responsive.Wp(57);
 
     return Scaffold(
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        color: Colors.white,
-        child: Stack(children: <Widget>[
-          Positioned(
-            top: -(pinkSize) * 0.4,
-            right: -(pinkSize) * 0.2,
-            child: Circle(
-              size: pinkSize,
-              colors: [
-                Colors.pink,
-                Colors.pinkAccent,
-              ],
+      body: GestureDetector(
+          onTap: () {
+            FocusScope.of(context).unfocus();
+          },
+          child: SingleChildScrollView(
+            child: Container(
+              width: double.infinity,
+              height: responsive.height,
+              color: Colors.white,
+              child: Stack(alignment: Alignment.center, children: <Widget>[
+                Positioned(
+                  top: -(pinkSize) * 0.35,
+                  right: -(pinkSize) * 0.2,
+                  child: Circle(
+                    size: pinkSize,
+                    colors: [
+                      Colors.blue,
+                      Colors.blueAccent,
+                    ],
+                  ),
+                ),
+                Positioned(
+                  top: -(orangeSize) * 0.55,
+                  left: -(orangeSize) * 0.15,
+                  child: Circle(
+                    size: orangeSize,
+                    colors: [
+                      Colors.black,
+                      Colors.grey,
+                    ],
+                  ),
+                ),
+                Positioned(
+                    top: pinkSize * 0.35,
+                    child: Column(children: <Widget>[
+                      IconContainer(size: responsive.Wp(17)),
+                      SizedBox(height: 30.0),
+                      Text(
+                        'Hello Again\nWelcome Back',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: responsive.Dp(3)),
+                      ),
+                    ])),
+                LoginForm(),
+              ]),
             ),
-          ),
-          Positioned(
-            top: -(orangeSize) * 0.55,
-            left: -(orangeSize) * 0.15,
-            child: Circle(
-              size: orangeSize,
-              colors: [
-                Colors.deepOrange,
-                Colors.deepOrangeAccent,
-              ],
-            ),
-          ),
-        ]),
-      ),
+          )),
     );
   }
 }
