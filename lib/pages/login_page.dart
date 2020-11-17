@@ -6,12 +6,13 @@ import 'package:apitest/widgets/login_form.dart';
 
 import 'package:apitest/utils/responsive.dart';
 
-class HomePage extends StatefulWidget {
+class LoginPage extends StatefulWidget {
+  static const routeName = 'login';
   @override
-  _HomePageState createState() => _HomePageState();
+  _LoginPageState createState() => _LoginPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     final Responsive responsive = Responsive.of(context);
